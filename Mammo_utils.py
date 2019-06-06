@@ -118,10 +118,12 @@ class Mammographie:
         batch_size = 30
 
         # First, we need to prepare our training and testing data, and pre-process it
+        print('Starting pre-processing the data ...')
         self.database_preprocessing()
         print('Database pre-processed !!')
 
         # Then, create our neural network model
+        print('Starting building the model ...')
         model = self.model()
         print('Model built !!')
 
