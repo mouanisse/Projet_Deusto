@@ -143,7 +143,7 @@ class Mammographie:
                                # ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
                            # ,validation_data=(self.val_data, self.val_labels))
                 
-        model.fit(self.train_data, self.train_labels, batch_size=30, epochs=20,
+        model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
                   validation_data=(self.val_data, self.val_labels))
         print('Training done !!')
 
