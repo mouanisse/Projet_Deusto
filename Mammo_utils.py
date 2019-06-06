@@ -51,7 +51,7 @@ class Mammographie:
                         k = k + 1
 
         # Transform the labels to use categorical_crossentropy (more than 2 classes) as a loss function
-        labels = np.array(tumor)
+        labels = tumor
 
         # Split into training and testing sets
         train_data, test_val_data, train_labels, test_val_labels = train_test_split(npy_dataset, labels, test_size=0.2,
@@ -73,10 +73,10 @@ class Mammographie:
         self.test_labels = test_labels
         self.input_shape = (200, 200, 1)
         
-        print('La valeur max des labels: '+labels.max())
-        print('La valeur min des labels: '+labels.min())
-        print('La valeur max des images de train: '+train_data[0].max())
-        print('La valeur min des images de train: '+train_data[0].min())
+        print(labels.max())
+        print(labels.min())
+        print(train_data[0].max())
+        print(train_data[0].min())
 
 
         # np.save('Projet_Deusto/Numpy_dataset/train_data.npy', train_data)
