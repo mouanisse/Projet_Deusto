@@ -58,7 +58,7 @@ class Mammographie:
         test_data, val_data, test_labels, val_labels = train_test_split(test_val_data, test_val_labels, test_size=0.5,
                                                                                     random_state=42)
 
-        # To get shape (200, 200, 1)
+        # To get shape (129, 129, 1)
         train_data = np.expand_dims(train_data, 3)
         val_data = np.expand_dims(val_data, 3)
         test_data = np.expand_dims(test_data, 3)
@@ -70,7 +70,7 @@ class Mammographie:
         self.train_labels = train_labels
         self.val_labels = val_labels
         self.test_labels = test_labels
-        self.input_shape = (200, 200, 1)
+        self.input_shape = (self.height, self.width, 1)
         
         print(labels.max())
         print(labels.min())
@@ -167,7 +167,7 @@ class Mammographie:
 
 
 
-mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/INCAN_database_(200,200)', 200, 200)
+mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/INCAN_database_(129,129)', 129, 129)
 mammo.train()
 
 
