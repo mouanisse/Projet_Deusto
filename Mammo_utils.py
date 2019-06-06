@@ -29,7 +29,7 @@ class Mammographie:
 
 
     def database_preprocessing(self):
-        tumor = np.empty([self.database_size, 1])
+        tumor = np.ones((self.database_size,1))
         npy_dataset = np.empty([self.database_size, self.height, self.width])
         for root, dirs, files in os.walk(self.database_path + '/', topdown=False):
             # Loop through files
@@ -45,8 +45,7 @@ class Mammographie:
             elif root[-1:] == '8':  # anormal images
                 k = 0
                 for f in files:
-                    if f != '.DS_Store' and f != '.DS_Sto**':
-                        tumor[k] = 1
+                    if f != '.DS_Store' and f != '.DS_Stoe**':
                         npy_dataset[k][:][:][:] = np.array(Image.open(root + '/' + f))
                         k = k + 1
 
