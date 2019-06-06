@@ -14,18 +14,18 @@ from tensorflow import keras
 
 class Mammographie:
 
-    def __init__(self, INCAN_size, database_path, height, width):
+    def __init__(self, INCAN_size, numpy_database_path, height, width):
         self.database_size = INCAN_size
-        self.database_path = database_path
+        self.database_path = None
         self.height = height
         self.width = width
-        self.train_data = None
-        self.val_data = None
-        self.test_data = None
-        self.train_labels = None
-        self.val_labels = None
-        self.test_labels = None
-        self.input_shape = None
+        self.train_data = np.load(numpy_database_path+'/train_data_(129,129).npy')
+        self.val_data = np.load(numpy_database_path+'/val_data_(129,129).npy')
+        self.test_data = np.load(numpy_database_path+'/test_data_(129,129).npy')
+        self.train_labels = np.load(numpy_database_path+'/train_labels_(129,129).npy')
+        self.val_labels = np.load(numpy_database_path+'/val_labels_(129,129).npy')
+        self.test_labels = np.load(numpy_database_path+'/test_labels_(129,129).npy')
+        self.input_shape = (height, width, 1)
 
 
     def database_preprocessing(self):
@@ -78,11 +78,6 @@ class Mammographie:
         print(train_data[0].min())
 
 
-        # np.save('Projet_Deusto/Numpy_dataset/train_data.npy', train_data)
-        # np.save('Projet_Deusto/Numpy_dataset/train_labels.npy', train_labels)
-        # np.save('Projet_Deusto/Numpy_dataset/test_val_data.npy', test_val_data)
-        # np.save('Projet_Deusto/Numpy_dataset/test_val_labels.npy', test_val_labels)
-
 
     def model(self):
 
@@ -122,9 +117,7 @@ class Mammographie:
         batch_size = 30
 
         # First, we need to prepare our training and testing data, and pre-process it
-        print('Starting pre-processing the data ...')
-        self.database_preprocessing()
-        print('Database pre-processed !!')
+        print('The database is already pre-processed ...')
 
         # Then, create our neural network model
         print('Starting building the model ...')
@@ -167,7 +160,7 @@ class Mammographie:
 
 
 
-mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/INCAN_database_(129,129)', 129, 129)
+mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
 mammo.train()
 
 
