@@ -51,7 +51,7 @@ class Mammographie:
                         k = k + 1
 
         # Transform the labels to use categorical_crossentropy (more than 2 classes) as a loss function
-        labels = tumor
+        labels = np.array(tumor)
 
         # Split into training and testing sets
         train_data, test_val_data, train_labels, test_val_labels = train_test_split(npy_dataset, labels, test_size=0.2,
