@@ -154,7 +154,7 @@ class Mammographie:
 
 
 mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/INCAN_database_resized', 640, 691)
-mammo.database_preprocessing()
+mammo.train()
 
 
 
