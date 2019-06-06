@@ -73,10 +73,10 @@ class Mammographie:
         self.test_labels = test_labels
         self.input_shape = (200, 200, 1)
         
-        print('La valeur max des labels: '+max(labels))
-        print('La valeur min des labels: '+min(labels))
-        print('La valeur max des images de train: '+max(train_data[0]))
-        print('La valeur min des images de train: '+min(train_data[0]))
+        print('La valeur max des labels: '+labels.max())
+        print('La valeur min des labels: '+labels.min())
+        print('La valeur max des images de train: '+train_data[0].max())
+        print('La valeur min des images de train: '+train_data[0].min())
 
 
         # np.save('Projet_Deusto/Numpy_dataset/train_data.npy', train_data)
