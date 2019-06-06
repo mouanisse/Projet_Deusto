@@ -70,7 +70,7 @@ class Mammographie:
         self.train_labels = train_labels
         self.val_labels = val_labels
         self.test_labels = test_labels
-        self.input_shape = (self.height, self.width, 1)
+        self.input_shape = (129, 129, 1)
         
         print(labels.max())
         print(labels.min())
