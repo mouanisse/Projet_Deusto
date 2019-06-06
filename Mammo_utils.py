@@ -33,7 +33,7 @@ class Mammographie:
         npy_dataset = np.empty([self.database_size, self.height, self.width])
         for root, dirs, files in os.walk(self.database_path + '/', topdown=False):
             # Loop through files
-            
+            print('***************')
             print(len(files))
             if root[-1:] == '0':  # normal images
                 k = 0
