@@ -53,7 +53,7 @@ class Mammographie:
                         k = k + 1
 
         # Transform the labels to use categorical_crossentropy (more than 2 classes) as a loss function
-        labels = keras.utils.to_categorical(tumor)
+        labels = tumor
 
         # Split into training and testing sets
         train_data, test_val_data, train_labels, test_val_labels = train_test_split(npy_dataset, labels, test_size=0.2,
@@ -73,7 +73,7 @@ class Mammographie:
         self.train_labels = train_labels
         self.val_labels = val_labels
         self.test_labels = test_labels
-        self.input_shape = (640, 690, 1)
+        self.input_shape = (640, 691, 1)
 
 
         # np.save('Projet_Deusto/Numpy_dataset/train_data.npy', train_data)
