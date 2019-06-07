@@ -105,7 +105,7 @@ class Mammographie:
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(64, activation='relu'))
         model.add(keras.layers.Dense(32, activation='relu'))
-        model.add(keras.layers.Dense(2, activation='softmax'))
+        model.add(keras.layers.Dense(1, activation='sigmoid'))
         
 
         return model
@@ -175,14 +175,14 @@ class Mammographie:
 
         # We perform DataAugmentation, since we have only 718 samples in total, we use Keras ImageDataGenerator object
         aug = keras.preprocessing.image.ImageDataGenerator(rotation_range=20, zoom_range=0.4,
-                                 width_shift_range=0.4, height_shift_range=0.4, shear_range=0.15,
+                                 width_shift_range=0.4, height_shift_range=0.4, shear_range=0.4,
                                  horizontal_flip=True, fill_mode="nearest")
 
 
 
         # We compile our model using adam optimizer and binary_crossentropy
         print('Starting compiling ...')
-        model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
         print('Compiling done !!')
 
 
