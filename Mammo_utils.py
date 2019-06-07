@@ -91,12 +91,12 @@ class Mammographie:
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
-        model.add(keras.layers.Conv2D(160, (3, 3), activation='relu'))
+        model.add(keras.layers.Conv2D(160, (3, 3), activation='relu', activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
         
 
-        model.add(keras.layers.Conv2D(320, (3, 3), activation='relu'))
+        model.add(keras.layers.Conv2D(320, (3, 3), activation='relu', activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
 
@@ -157,7 +157,7 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 80
+        epochs = 50
         batch_size = 60
 
         # First, we need to prepare our training and testing data, and pre-process it
