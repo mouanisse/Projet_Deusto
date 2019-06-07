@@ -204,9 +204,9 @@ class Mammographie:
 
 
         # We test our model using the test dataset
-        score = model.evaluate(self.test_data, self.test_labels, verbose=0)
-        print('Test loss:', score[0])
-        print('Test accuracy:', score[1])
+        score = model.predict(self.test_data, self.test_labels, verbose=2)
+        print('Expected', self.test_labels)
+        print('Output', score)
 
 
 
