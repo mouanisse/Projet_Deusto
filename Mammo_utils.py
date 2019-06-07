@@ -212,7 +212,7 @@ class Mammographie:
 
 
 mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
-mammo.train2()
+mammo.train()
 
 
 
