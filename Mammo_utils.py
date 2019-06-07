@@ -70,7 +70,6 @@ class Mammographie:
         self.train_labels = train_labels
         self.val_labels = val_labels
         self.test_labels = test_labels
-        self.input_shape = (129, 129, 1)
         
         print(labels.max())
         print(labels.min())
@@ -86,7 +85,7 @@ class Mammographie:
         model = keras.Sequential()
 
 
-        model.add(keras.layers.Conv2D(20, (5, 1), activation='relu', input_shape=self.input_shape))
+        model.add(keras.layers.Conv2D(20, (4, 4), activation='relu', input_shape=self.input_shape))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
@@ -94,11 +93,11 @@ class Mammographie:
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
-        model.add(keras.layers.Conv2D(80, (3, 3), activation='relu'))
+        model.add(keras.layers.Conv2D(80, (2, 2), activation='relu'))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
 
-        model.add(keras.layers.Conv2D(160, (3, 3), activation='relu'))
+        model.add(keras.layers.Conv2D(160, (2, 2), activation='relu'))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
 
