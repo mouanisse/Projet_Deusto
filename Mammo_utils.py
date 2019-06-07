@@ -107,6 +107,51 @@ class Mammographie:
         model.add(keras.layers.Dense(1, activation='sigmoid'))
 
         return model
+    
+    def model2(self):
+        
+        model = keras.Sequential()
+        model.add(keras.layers.Dense(64,input_shape=self.input_shape))
+        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Dense(64, kernel_initializer='normal'))
+        model.add(keras.layers.Dense(1, activation='sigmoid'))
+        
+        return model
+    
+    def train2(self):
+        
+        # Define epoch and batch_size
+        epochs = 100
+        batch_size = 30
+        
+        # First, we need to prepare our training and testing data, and pre-process it
+        self.train_data = np.true_divide(self.train_data, 255)
+        self.val_data = np.true_divide(self.val_data, 255)
+        self.test_data = np.true_divide(self.test_data, 255)
+        print('The database is normalised !!')
+        
+        # Then, create our neural network model
+        print('Starting building the model ...')
+        model = self.model2()
+        print('Model built !!')
+    
+    
+        # We compile our model using adam optimizer and binary_crossentropy
+        print('Starting compiling ...')
+        model.compile(loss='mean_squared_error', optimizer=Adam(lr=0.0001), metrics=['accuracy'])
+        print('Compiling done !!')
+        
+   
+        print('Starting the training...')
+        model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
+                   validation_data=(self.val_data, self.val_labels), verbose=1)
+        print('Training done !!')
+        
+        
+        # We test our model using the test dataset
+        score = model.evaluate(self.test_data, self.test_labels, verbose=0)
+        print('Test loss:', score[0])
+        print('Test accuracy:', score[1])
 
 
     def train(self):
@@ -127,7 +172,7 @@ class Mammographie:
         print('Model built !!')
 
         # We perform DataAugmentation, since we have only 718 samples in total, we use Keras ImageDataGenerator object
-        aug = keras.preprocessing.image.ImageDataGenerator(rotation_range=50, zoom_range=0.15,
+        aug = keras.preprocessing.image.ImageDataGenerator(rotation_range=20, zoom_range=0.15,
                                  width_shift_range=0.2, height_shift_range=0.2, shear_range=0.15,
                                  horizontal_flip=True, fill_mode="nearest")
 
@@ -163,7 +208,7 @@ class Mammographie:
 
 
 mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
-mammo.train()
+mammo.train2()
 
 
 
