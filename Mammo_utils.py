@@ -138,7 +138,7 @@ class Mammographie:
     
         # We compile our model using adam optimizer and binary_crossentropy
         print('Starting compiling ...')
-        model.compile(loss='mean_squared_error', optimizer=Adam(lr=0.0001), metrics=['accuracy'])
+        model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
         print('Compiling done !!')
         
    
