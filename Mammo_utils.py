@@ -116,7 +116,10 @@ class Mammographie:
         batch_size = 30
 
         # First, we need to prepare our training and testing data, and pre-process it
-        print('The database is already pre-processed ...')
+        self.train_data = self.train_data./255
+        self.val_data = self.val_data./255
+        self.test_data = self.test_data./255
+        print('The database is normalised !!')
 
         # Then, create our neural network model
         print('Starting building the model ...')
