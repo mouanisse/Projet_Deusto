@@ -19,12 +19,12 @@ class Mammographie:
         self.database_path = None
         self.height = height
         self.width = width
-        self.train_data = np.load(numpy_database_path+'/train_data_(129,129).npy')
-        self.val_data = np.load(numpy_database_path+'/val_data_(129,129).npy')
-        self.test_data = np.load(numpy_database_path+'/test_data_(129,129).npy')
-        self.train_labels = np.load(numpy_database_path+'/train_labels_(129,129).npy')
-        self.val_labels = np.load(numpy_database_path+'/val_labels_(129,129).npy')
-        self.test_labels = np.load(numpy_database_path+'/test_labels_(129,129).npy')
+        self.train_data = np.load(numpy_database_path+'/train_data_(200,200).npy')
+        self.val_data = np.load(numpy_database_path+'/val_data_(200,200).npy')
+        self.test_data = np.load(numpy_database_path+'/test_data_(200,200).npy')
+        self.train_labels = np.load(numpy_database_path+'/train_labels_(200,200).npy')
+        self.val_labels = np.load(numpy_database_path+'/val_labels_(200,200).npy')
+        self.test_labels = np.load(numpy_database_path+'/test_labels_(200,200).npy')
         self.input_shape = (height, width, 1)
 
 
@@ -174,9 +174,6 @@ class Mammographie:
         print('Model built !!')
 
         # We perform DataAugmentation, since we have only 718 samples in total, we use Keras ImageDataGenerator object
-        aug1 = keras.preprocessing.image.ImageDataGenerator(rotation_range=20, zoom_range=0.2,
-                                 width_shift_range=0.2, height_shift_range=0.2, shear_range=0.15,
-                                 horizontal_flip=True, fill_mode="nearest")
         
         aug = keras.preprocessing.image.ImageDataGenerator(rotation_range=15,
                                width_shift_range=0.1,
@@ -220,7 +217,7 @@ class Mammographie:
 
 
 
-mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
+mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 200, 200)
 mammo.train()
 
 
