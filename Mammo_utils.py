@@ -127,7 +127,7 @@ class Mammographie:
         print('Model built !!')
 
         # We perform DataAugmentation, since we have only 718 samples in total, we use Keras ImageDataGenerator object
-        aug = keras.preprocessing.image.ImageDataGenerator(rotation_range=20, zoom_range=0.15,
+        aug = keras.preprocessing.image.ImageDataGenerator(rotation_range=50, zoom_range=0.15,
                                  width_shift_range=0.2, height_shift_range=0.2, shear_range=0.15,
                                  horizontal_flip=True, fill_mode="nearest")
 
