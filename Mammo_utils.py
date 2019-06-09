@@ -207,7 +207,7 @@ class Mammographie:
         # verbose shows you the training progress for each epoch, 0 is silent, 1 will show an animated progress bar "[=======]"
         # , and 2 will just mention the number of Epoch "Epoch 1/10"
         score = model.predict(self.test_data, verbose=2)
-        print('Output:', score)
+        print('Output:', score.argmax(axis=1))
 
 
 
