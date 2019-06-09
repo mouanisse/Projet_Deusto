@@ -204,9 +204,10 @@ class Mammographie:
 
 
         # We test our model using the test dataset
-        score = model.predict(self.test_data, self.test_labels, verbose=2)
-        print('Expected', self.test_labels)
-        print('Output', score)
+        # verbose shows you the training progress for each epoch, 0 is silent, 1 will show an animated progress bar "[=======]"
+        # , and 2 will just mention the number of Epoch "Epoch 1/10"
+        score = model.predict(self.test_data, verbose=2)
+        print('Output:', score)
 
 
 
