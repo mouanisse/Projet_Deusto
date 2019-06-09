@@ -105,7 +105,7 @@ class Mammographie:
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(64, activation='relu'))
         model.add(keras.layers.Dense(32, activation='relu'))
-        model.add(keras.layers.Dense(1, activation='sigmoid'))
+        model.add(keras.layers.Dense(2, activation='softmax'))
         
 
         return model
