@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 from sklearn.model_selection import train_test_split
 from tensorflow import keras
-
+from sklearn.metrics import confusion_matrix
 
 
 
@@ -215,11 +215,12 @@ class Mammographie:
         actual_labels = self.test_labels.astype(np.int)
         print('Actual labels: ', actual_labels)
         print('Predicted labels: ', predicted_labels)
-
-
-
-
-
+        
+        #Compute the confusion matrix
+        matrix = confusion_matrix(actual_labels, predicted_labels)
+        print(matrix)
+        
+        
 
 
 
