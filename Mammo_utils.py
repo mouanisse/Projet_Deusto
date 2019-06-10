@@ -198,7 +198,7 @@ class Mammographie:
         print(matrix)
         
         #Save the model in h5 format
-        model.save(mammo.h5)
+        model.save('mammo.h5')
         
 
 
