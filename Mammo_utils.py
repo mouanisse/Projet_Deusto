@@ -115,16 +115,18 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 150
+        epochs = 170
         batch_size = 30
 
         # First, we need to prepare our training and testing data, and pre-process it
         print('The database is already pre-processed!!')
 
+        
         # Then, create our neural network model
         print('Starting building the model ...')
         model = self.model()
         print('Model built !!')
+        
 
         # We perform DataAugmentation, since we have only 718 samples in total, we use Keras ImageDataGenerator object
         
@@ -167,9 +169,9 @@ class Mammographie:
         
                 
         #model.fit(self.train_data, self.train_labels,
-                 #  batch_size=batch_size, epochs=epochs,
-               #   verbose=1, validation_data=(self.val_data, self.val_labels),
-                      #   callbacks=[CallBack])
+              #  batch_size=batch_size, epochs=epochs,
+            # verbose=1, validation_data=(self.val_data, self.val_labels),
+                    # callbacks=[CallBack])
         
             
         print('Training done !!')
@@ -190,37 +192,13 @@ class Mammographie:
         print('Actual labels: ', actual_labels)
         print('Predicted labels: ', predicted_labels)
         
+        
         #Compute the confusion matrix
         matrix = confusion_matrix(actual_labels, predicted_labels)
         print(matrix)
         
-        #history_dict = history.history
-        #loss_values = history_dict['loss']
-        #val_loss_values = history_dict['val_loss']
-        #acc = history_dict['acc']
-        #val_acc = history_dict['val_acc']
-
-        #Epochs = range(1, len(loss_values)+1)
-
-        #plt.plot(Epochs, loss_values, 'r', label='Training loss')
-        #plt.plot(Epochs, val_loss_values, 'b', label='Validation loss')
-        #plt.title('Training and Validation loss')
-        #plt.xlabel('Epochs')
-        #plt.ylabel('Loss')
-        #plt.legend()
-
-        #plt.show()
-
-
-        #plt.plot(Epochs, acc, 'r', label='Training acc')
-        #plt.plot(Epochs, val_acc, 'b', label='Validation acc')
-        #plt.title('Training and Validation accuracy')
-        #plt.xlabel('Epochs')
-        #plt.ylabel('Accuracy')
-        #plt.legend()
-
-        #plt.show()
-        
+        #Save the model in h5 format
+        model.save(mammo.h5)
         
 
 
