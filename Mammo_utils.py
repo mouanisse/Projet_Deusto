@@ -161,10 +161,10 @@ class Mammographie:
                          batch_size=batch_size,
                          write_images=True)
                 
-        history = model.fit(self.train_data, self.train_labels,
-                            batch_size=batch_size, epochs=epochs,
-                   validation_data=(self.val_data, self.val_labels),
-                            callbacks=[CallBack])
+        model.fit(self.train_data, self.train_labels,
+                   batch_size=batch_size, epochs=epochs,
+                  verbose=1, validation_data=(self.val_data, self.val_labels),
+                         callbacks=[CallBack])
         
             
         print('Training done !!')
@@ -189,13 +189,13 @@ class Mammographie:
         matrix = confusion_matrix(actual_labels, predicted_labels)
         print(matrix)
         
-        history_dict = history.history
-        loss_values = history_dict['loss']
-        val_loss_values = history_dict['val_loss']
-        acc = history_dict['acc']
-        val_acc = history_dict['val_acc']
+        #history_dict = history.history
+        #loss_values = history_dict['loss']
+        #val_loss_values = history_dict['val_loss']
+        #acc = history_dict['acc']
+        #val_acc = history_dict['val_acc']
 
-        Epochs = range(1, len(loss_values)+1)
+        #Epochs = range(1, len(loss_values)+1)
 
         #plt.plot(Epochs, loss_values, 'r', label='Training loss')
         #plt.plot(Epochs, val_loss_values, 'b', label='Validation loss')
