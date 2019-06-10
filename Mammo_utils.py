@@ -181,6 +181,8 @@ class Mammographie:
         history_dict = history.history
         loss_values = history_dict['loss']
         val_loss_values = history_dict['val_loss']
+        acc = history_dict['acc']
+        val_acc = history_dict['val_acc']
 
         Epochs = range(1, len(loss_values)+1)
 
@@ -193,18 +195,15 @@ class Mammographie:
 
         plt.show()
 
-        acc = history_dict['acc']
-        val_acc = history_dict['val_acc']
 
+        #plt.plot(Epochs, acc, 'r', label='Training acc')
+        #plt.plot(Epochs, val_acc, 'b', label='Validation acc')
+        #plt.title('Training and Validation accuracy')
+        #plt.xlabel('Epochs')
+        #plt.ylabel('Accuracy')
+        #plt.legend()
 
-        plt.plot(Epochs, acc, 'r', label='Training acc')
-        plt.plot(Epochs, val_acc, 'b', label='Validation acc')
-        plt.title('Training and Validation accuracy')
-        plt.xlabel('Epochs')
-        plt.ylabel('Accuracy')
-        plt.legend()
-
-        plt.show()
+        #plt.show()
         
         
 
