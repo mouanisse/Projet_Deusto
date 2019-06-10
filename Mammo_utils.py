@@ -7,6 +7,7 @@ from PIL import Image
 from sklearn.model_selection import train_test_split
 from tensorflow import keras
 from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
 
 
 
