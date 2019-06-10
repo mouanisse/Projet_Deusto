@@ -151,8 +151,36 @@ class Mammographie:
                            #   ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
                         #   , validation_data=(self.val_data, self.val_labels))
                 
-        model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
+        history = model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
                    validation_data=(self.val_data, self.val_labels))
+        
+        history_dict = history.history
+        loss_values = history_dict['loss']
+        val_loss_values = history_dict['val_loss']
+
+        epochs = range(1, len(loss_values)+1)
+
+        plt.plot(epochs, loss_values, 'r', label='Training loss')
+        plt.plot(epochs, val_loss_values, 'b', label='Validation loss')
+        plt.title('Training and Validation loss')
+        plt.xlabel('Epochs')
+        plt.ylabel('Loss')
+        plt.legend()
+
+        plt.show()
+
+        acc = history_dict['acc']
+        val_acc = history_dict['val_acc']
+
+
+        plt.plot(epochs,acc, 'r', label='Training acc')
+        plt.plot(epochs, val_acc, 'b', label='Validation acc')
+        plt.title('Training and Validation accuracy')
+        plt.xlabel('Epochs')
+        plt.ylabel('Accuracy')
+        plt.legend()
+
+        plt.show()
             
         print('Training done !!')
 
