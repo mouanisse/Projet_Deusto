@@ -208,8 +208,8 @@ class Mammographie:
         # , and 2 will just mention the number of Epoch "Epoch 1/10"
         score = model.predict(self.test_data, verbose=2)
         predicted_labels = (score<0.5)
-        print('Actual labels', self.test_labels)
-        print('Predicted labels', predicted_labels)
+        print('Actual labels', self.test_labels.astype(np.int))
+        print('Predicted labels', predicted_labels.astype(np.int))
 
 
 
