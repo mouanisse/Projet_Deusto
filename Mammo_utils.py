@@ -113,7 +113,7 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 40
+        epochs = 50
         batch_size = 30
 
         # First, we need to prepare our training and testing data, and pre-process it
@@ -180,7 +180,7 @@ class Mammographie:
 
 
 
-mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
+mammo = Mammographie(380, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
 mammo.train()
 
 
