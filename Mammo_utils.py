@@ -155,14 +155,16 @@ class Mammographie:
                 
         # Visualising the results using Tensorboard
         
-        CallBack = TensorBoard(log_dir='./log', histogram_freq=1,
+        CallBack = keras.callbacks.TensorBoard(log_dir='./log', histogram_freq=1,
                          write_graph=True,
                          write_grads=True,
                          batch_size=batch_size,
                          write_images=True)
                 
-        history = model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
-                   validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
+        history = model.fit(self.train_data, self.train_labels,
+                            batch_size=batch_size, epochs=epochs,
+                   validation_data=(self.val_data, self.val_labels),
+                            callbacks=[CallBack])
         
             
         print('Training done !!')
