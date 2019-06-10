@@ -19,12 +19,12 @@ class Mammographie:
         self.database_path = None
         self.height = height
         self.width = width
-        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+').npy')
-        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+').npy')
-        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+').npy')
+        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+')_mini.npy')
+        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+')_mini.npy')
+        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+')_mini.npy')
+        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+')_mini.npy')
+        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+')_mini.npy')
+        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+')_mini.npy')
         self.input_shape = (height, width, 1)
 
 
@@ -97,7 +97,6 @@ class Mammographie:
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
         
-
         model.add(keras.layers.Conv2D(320, (3, 3), activation='relu', activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
@@ -109,58 +108,13 @@ class Mammographie:
         
 
         return model
-    
-    def model2(self):
-        
-        model = keras.Sequential()
-        model.add(keras.layers.Dense(64,input_shape=self.input_shape))
-        model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Dense(64, kernel_initializer='normal'))
-        model.add(keras.layers.Dense(2, activation='softmax'))
-        
-        return model
-    
-    def train2(self):
-        
-        # Define epoch and batch_size
-        epochs = 100
-        batch_size = 30
-        
-        # First, we need to prepare our training and testing data, and pre-process it
-        self.train_data = np.true_divide(self.train_data, 255)
-        self.val_data = np.true_divide(self.val_data, 255)
-        self.test_data = np.true_divide(self.test_data, 255)
-        print('The database is normalised !!')
-        
-        # Then, create our neural network model
-        print('Starting building the model ...')
-        model = self.model2()
-        print('Model built !!')
-    
-    
-        # We compile our model using adam optimizer and binary_crossentropy
-        print('Starting compiling ...')
-        model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-        print('Compiling done !!')
-        
-   
-        print('Starting the training...')
-        model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
-                   validation_data=(self.val_data, self.val_labels), verbose=1)
-        print('Training done !!')
-        
-        
-        # We test our model using the test dataset
-        score = model.evaluate(self.test_data, self.test_labels, verbose=0)
-        print('Test loss:', score[0])
-        print('Test accuracy:', score[1])
-
+ 
 
     def train(self):
 
         # Define epoch and batch_size
         epochs = 50
-        batch_size = 60
+        batch_size = 30
 
         # First, we need to prepare our training and testing data, and pre-process it
         print('The database is already pre-processed!!')
@@ -210,6 +164,7 @@ class Mammographie:
         
         # verbose shows you the training progress for each epoch, 0 is silent, 1 will show an animated progress bar "[=======]"
         # , and 2 will just mention the number of Epoch "Epoch 1/10"
+        # ATTENTION: predict function returned an array of probabilities of the second class, and not the first one.
         # score = model.predict(self.test_data)
         # predicted_labels = (score<0.5).astype(np.int)
         predicted_labels = model.predict_classes(self.test_data)
