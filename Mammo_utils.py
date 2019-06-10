@@ -185,6 +185,8 @@ class Mammographie:
         val_acc = history_dict['val_acc']
 
         Epochs = range(1, len(loss_values)+1)
+        
+        plt.figure()
 
         plt.plot(Epochs, loss_values, 'r', label='Training loss')
         plt.plot(Epochs, val_loss_values, 'b', label='Validation loss')
