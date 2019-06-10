@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow import keras
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
+from keras.callbacks import TensorBoard
 
 
 
@@ -152,8 +153,16 @@ class Mammographie:
                            #   ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
                         #   , validation_data=(self.val_data, self.val_labels))
                 
+        # Visualising the results using Tensorboard
+        
+        CallBack = TensorBoard(log_dir='./log', histogram_freq=1,
+                         write_graph=True,
+                         write_grads=True,
+                         batch_size=batch_size,
+                         write_images=True)
+                
         history = model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
-                   validation_data=(self.val_data, self.val_labels))
+                   validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
         
             
         print('Training done !!')
@@ -185,17 +194,15 @@ class Mammographie:
         val_acc = history_dict['val_acc']
 
         Epochs = range(1, len(loss_values)+1)
-        
-        plt.figure()
 
-        plt.plot(Epochs, loss_values, 'r', label='Training loss')
-        plt.plot(Epochs, val_loss_values, 'b', label='Validation loss')
-        plt.title('Training and Validation loss')
-        plt.xlabel('Epochs')
-        plt.ylabel('Loss')
-        plt.legend()
+        #plt.plot(Epochs, loss_values, 'r', label='Training loss')
+        #plt.plot(Epochs, val_loss_values, 'b', label='Validation loss')
+        #plt.title('Training and Validation loss')
+        #plt.xlabel('Epochs')
+        #plt.ylabel('Loss')
+        #plt.legend()
 
-        plt.show()
+        #plt.show()
 
 
         #plt.plot(Epochs, acc, 'r', label='Training acc')
