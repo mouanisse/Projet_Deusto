@@ -117,8 +117,8 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 200
-        batch_size = 30
+        epochs = 20
+        batch_size = 50
 
         # First, we need to prepare our training and testing data, and pre-process it
         print('The database is already pre-processed!!')
@@ -164,16 +164,14 @@ class Mammographie:
                          write_images=True)
         
         
-        model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
-                             ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
-                          , validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
+        #model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
+                          #   ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
+                       #   , validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
                 
         
                 
-        #model.fit(self.train_data, self.train_labels,
-              #  batch_size=batch_size, epochs=epochs,
-            # verbose=1, validation_data=(self.val_data, self.val_labels),
-                    # callbacks=[CallBack])
+        model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
+            verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
         
             
         print('Training done !!')
@@ -207,7 +205,7 @@ class Mammographie:
 
 
 
-mammo = Mammographie(380, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
+mammo = Mammographie(6000, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
 mammo.train()
 
 
