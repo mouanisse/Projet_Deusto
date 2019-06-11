@@ -117,8 +117,8 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 20
-        batch_size = 50
+        epochs = 50
+        batch_size = 100
 
         # First, we need to prepare our training and testing data, and pre-process it
         print('The database is already pre-processed!!')
@@ -171,7 +171,7 @@ class Mammographie:
         
                 
         model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
-            verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
+            verbose=1, validation_data=(self.val_data, self.val_labels))#, callbacks=[CallBack])
         
             
         print('Training done !!')
