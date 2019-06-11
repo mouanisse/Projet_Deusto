@@ -9,6 +9,7 @@ from tensorflow import keras
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 from keras.callbacks import TensorBoard
+from keras.applications import VGG16
 
 
 
@@ -21,12 +22,12 @@ class Mammographie:
         self.database_path = None
         self.height = height
         self.width = width
-        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+')_mini.npy')
-        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+')_mini.npy')
-        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+')_mini.npy')
-        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+')_mini.npy')
-        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+')_mini.npy')
-        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+')_mini.npy')
+        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+')_max.npy')
         self.input_shape = (height, width, 1)
 
 
@@ -81,6 +82,7 @@ class Mammographie:
 
 
     def model(self):
+    
 
         # 4(2D_CONV_LAYERS + Batch_Norm + 2DMaxPooling) + 2FULLY_CONNECTED + 1SOFTMAX
 
@@ -164,7 +166,7 @@ class Mammographie:
         
         model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
                              ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
-                          , validation_data=(self.val_data, self.val_labels))
+                          , validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
                 
         
                 
