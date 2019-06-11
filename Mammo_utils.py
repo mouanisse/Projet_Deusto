@@ -171,7 +171,7 @@ class Mammographie:
         
                 
         model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
-            verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
+            verbose=1, validation_data=(self.val_data, self.val_labels))
         
             
         print('Training done !!')
