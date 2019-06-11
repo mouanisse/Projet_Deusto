@@ -115,7 +115,7 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 150
+        epochs = 190
         batch_size = 30
 
         # First, we need to prepare our training and testing data, and pre-process it
@@ -164,7 +164,7 @@ class Mammographie:
         
         model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
                              ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
-                          , validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
+                          , validation_data=(self.val_data, self.val_labels))
                 
         
                 
@@ -182,11 +182,13 @@ class Mammographie:
         print('Test loss:', score[0])
         print('Test accuracy:', score[1])
         
+        
+        
         # verbose shows you the training progress for each epoch, 0 is silent, 1 will show an animated progress bar "[=======]"
         # , and 2 will just mention the number of Epoch "Epoch 1/10"
         # ATTENTION: predict function returned an array of probabilities of the second class, and not the first one.
         # score = model.predict(self.test_data)
-        # predicted_labels = (score<0.5).astype(np.int)
+        # predicted_labels = (score > 0.5).astype(np.int)
         predicted_labels = model.predict_classes(self.test_data)
         actual_labels = self.test_labels.astype(np.int)
         print('Actual labels: ', actual_labels)
