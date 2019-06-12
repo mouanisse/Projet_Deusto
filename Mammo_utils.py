@@ -117,7 +117,7 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 30
+        epochs = 40
         batch_size = 100
 
         # First, we need to prepare our training and testing data, and pre-process it
@@ -212,8 +212,6 @@ class Mammographie:
         # predicted_labels = (score > 0.5).astype(np.int)
         predicted_labels = model.predict_classes(self.test_data)
         actual_labels = self.test_labels.astype(np.int)
-        print('Actual labels: ', actual_labels)
-        print('Predicted labels: ', predicted_labels)
         
         
         #Compute the confusion matrix
