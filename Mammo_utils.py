@@ -22,17 +22,17 @@ class Mammographie:
         self.database_path = None
         self.height = height
         self.width = width
-        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+').npy')
         print('Hello')
-        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+').npy')
         print('Hello1')
-        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+').npy')
         print('Hello2')
-        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+').npy')
         print('Hello3')
-        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+').npy')
         print('Hello4')
-        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+')_max.npy')
+        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+').npy')
         print('Hello5')
         self.input_shape = (height, width, 1)
 
