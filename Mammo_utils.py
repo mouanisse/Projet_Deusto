@@ -165,7 +165,7 @@ class Mammographie:
         
         # Performing Early stopping to avoid overfitting
         
-         CallBack_es = keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=6)
+        CallBack_es = keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=6)
         
         
         # model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
