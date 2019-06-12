@@ -117,7 +117,7 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 10
+        epochs = 5
         batch_size = 100
 
         # First, we need to prepare our training and testing data, and pre-process it
