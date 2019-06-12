@@ -203,6 +203,7 @@ class Mammographie:
         model.save('mammo.h5')
         
 
+        
 
 
 mammo = Mammographie(1056, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
