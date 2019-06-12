@@ -187,7 +187,7 @@ class Mammographie:
         print('Training done !!')
         
         # load weights
-        model.load_weights("weights.best.hdf5")
+        model.load_weights("best_weights.hdf5")
         
         
         
