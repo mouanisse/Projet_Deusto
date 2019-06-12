@@ -146,7 +146,7 @@ class Mammographie:
 
 
         # We compile our model using adam optimizer and binary_crossentropy
-        print('Starting compiling ...')
+        print('Starting compiling the model ...')
         model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
         print('Compiling done !!')
         
@@ -157,7 +157,7 @@ class Mammographie:
         
         # Visualizing the results using Tensorboard as a backend
         
-        CallBack = keras.callbacks.TensorBoard(log_dir='./log', histogram_freq=1,
+        TensorBoard = keras.callbacks.TensorBoard(log_dir='./log', histogram_freq=1,
                          write_graph=True,
                          write_grads=True,
                          batch_size=batch_size,
@@ -168,6 +168,12 @@ class Mammographie:
         CallBack_es = keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=6)
         
         
+        # Perform checkpoint
+        filepath = "best_weights.hdf5"
+        checkpoint = keras.callbacks.ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+        callbacks_list = [TensorBoard, checkpoint]
+        
+        
         # model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
                       #  ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
                      #  , validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
@@ -175,11 +181,22 @@ class Mammographie:
         
                 
         model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
-             verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=[CallBack, CallBack_es])
+             verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=callbacks_list)
         
             
         print('Training done !!')
-
+        
+        # load weights
+        model.load_weights("weights.best.hdf5")
+        
+        
+        
+        # We compile the model used for predictions
+        print('Starting compiling the model used for predictions...')
+        model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
+        print("Created model and loaded weights from file")
+        
+        
 
         # We test our model using the test dataset
         score = model.evaluate(self.test_data, self.test_labels, verbose=0)
@@ -202,6 +219,7 @@ class Mammographie:
         #Compute the confusion matrix
         matrix = confusion_matrix(actual_labels, predicted_labels)
         print(matrix)
+        
         
         #Save the model in h5 format
         model.save('mammo.h5')
