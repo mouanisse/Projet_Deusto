@@ -22,12 +22,12 @@ class Mammographie:
         self.database_path = None
         self.height = height
         self.width = width
-        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+').npy')
-        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+').npy')
-        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+').npy')
+        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+')_n.npy')
+        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+')_n.npy')
+        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+')_n.npy')
+        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+')_n.npy')
+        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+')_n.npy')
+        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+')_n.npy')
         self.input_shape = (height, width, 1)
 
 
@@ -205,7 +205,7 @@ class Mammographie:
 
 
 
-mammo = Mammographie(1056, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
+mammo = Mammographie(718, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
 mammo.train()
 
 
