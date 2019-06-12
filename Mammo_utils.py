@@ -117,7 +117,7 @@ class Mammographie:
     def train(self):
 
         # Define epoch and batch_size
-        epochs = 30
+        epochs = 40
         batch_size = 100
 
         # First, we need to prepare our training and testing data, and pre-process it
@@ -164,14 +164,14 @@ class Mammographie:
                          write_images=True)
         
         
-        #model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
-                          #   ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
-                       #   , validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
+        model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
+                        ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
+                       , validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
                 
         
                 
-        model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
-            verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
+        # model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
+            # verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
         
             
         print('Training done !!')
