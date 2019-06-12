@@ -163,6 +163,10 @@ class Mammographie:
                          batch_size=batch_size,
                          write_images=True)
         
+        # Performing Early stopping to avoid overfitting
+        
+         CallBack_es = keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=6)
+        
         
         # model.fit_generator(aug.flow(self.train_data, self.train_labels, batch_size=batch_size)
                       #  ,steps_per_epoch=len(self.train_data)//batch_size, epochs=epochs
@@ -171,7 +175,7 @@ class Mammographie:
         
                 
         model.fit(self.train_data, self.train_labels, batch_size=batch_size, epochs=epochs,
-             verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=[CallBack])
+             verbose=1, validation_data=(self.val_data, self.val_labels), callbacks=[CallBack, CallBack_es])
         
             
         print('Training done !!')
