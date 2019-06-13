@@ -89,7 +89,7 @@ class Mammographie:
         model = keras.Sequential()
 
 
-        model.add(keras.layers.Conv2D(40, (5, 1), activation='relu', input_shape=self.input_shape))
+        model.add(keras.layers.Conv2D(40, (5, 5), activation='relu', input_shape=self.input_shape))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
