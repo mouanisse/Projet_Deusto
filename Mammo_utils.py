@@ -89,19 +89,19 @@ class Mammographie:
         model = keras.Sequential()
 
 
-        model.add(keras.layers.Conv2D(40, (5, 1), activation='relu', input_shape=self.input_shape))
+        model.add(keras.layers.Conv2D(20, (5, 1), activation='relu', input_shape=self.input_shape))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
-        model.add(keras.layers.Conv2D(80, (4, 4), activation='relu'))
+        model.add(keras.layers.Conv2D(40, (4, 4), activation='relu'))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
-        model.add(keras.layers.Conv2D(160, (3, 3), activation='relu')) #activity_regularizer=keras.regularizers.l1(0.001)))
+        model.add(keras.layers.Conv2D(80, (3, 3), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
         
-        model.add(keras.layers.Conv2D(320, (3, 3), activation='relu')) #activity_regularizer=keras.regularizers.l1(0.001)))
+        model.add(keras.layers.Conv2D(160, (3, 3), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
 
@@ -165,7 +165,7 @@ class Mammographie:
         
         # Performing Early stopping to avoid overfitting
         
-        CallBack_es = keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=6)
+        EarlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=6)
         
         
         # Perform checkpoint
