@@ -87,24 +87,20 @@ class Mammographie:
         # 4(2D_CONV_LAYERS + Batch_Norm + 2DMaxPooling) + 2FULLY_CONNECTED + 1SOFTMAX
 
         model = keras.Sequential()
-        
-        model.add(keras.layers.Conv2D(20, (5, 1), activation='relu', input_shape=self.input_shape))
-        model.add(keras.layers.BatchNormalization())
-        model.add(keras.layers.MaxPooling2D(2, 2))
 
-        model.add(keras.layers.Conv2D(40, (4, 4), activation='relu', input_shape=self.input_shape))
+        model.add(keras.layers.Conv2D(80, (4, 4), activation='relu', input_shape=self.input_shape))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
-        model.add(keras.layers.Conv2D(80, (4, 4), activation='relu'))
+        model.add(keras.layers.Conv2D(160, (4, 4), activation='relu'))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
-        model.add(keras.layers.Conv2D(160, (3, 3), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
-        model.add(keras.layers.BatchNormalization())
-        model.add(keras.layers.MaxPooling2D(2, 2))
-        
         model.add(keras.layers.Conv2D(320, (3, 3), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
+        model.add(keras.layers.BatchNormalization())
+        model.add(keras.layers.MaxPooling2D(2, 2))
+        
+        model.add(keras.layers.Conv2D(640, (3, 3), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
 
@@ -151,6 +147,7 @@ class Mammographie:
         # We compile our model using adam optimizer and binary_crossentropy
         print('Starting compiling the model ...')
         model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
+        model.summary()
         print('Compiling done !!')
         
         
