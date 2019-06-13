@@ -197,7 +197,7 @@ class Mammographie:
         # We compile the model used for predictions
         print('Starting compiling the model used for predictions...')
         model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
-        print("Created model and loaded weights from file")
+        print("Created model and loaded weights from file !!")
         
         
 
