@@ -174,7 +174,7 @@ class Mammographie:
         
         # Perform checkpoint
         filepath = "best_weights.hdf5"
-        checkpoint = keras.callbacks.ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+        checkpoint = keras.callbacks.ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
         callbacks_list = [TensorBoard, checkpoint]
         
         
