@@ -22,12 +22,12 @@ class Mammographie:
         self.database_path = None
         self.height = height
         self.width = width
-        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+').npy')
-        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+').npy')
-        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+').npy')
-        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+').npy')
+        self.train_data = np.load(numpy_database_path+'/train_data_('+str(self.height)+','+str(self.width)+')_2112.npy')
+        self.val_data = np.load(numpy_database_path+'/val_data_('+str(self.height)+','+str(self.width)+')_2112.npy')
+        self.test_data = np.load(numpy_database_path+'/test_data_('+str(self.height)+','+str(self.width)+'_2112.npy')
+        self.train_labels = np.load(numpy_database_path+'/train_labels_('+str(self.height)+','+str(self.width)+')_2112.npy')
+        self.val_labels = np.load(numpy_database_path+'/val_labels_('+str(self.height)+','+str(self.width)+')_2112.npy')
+        self.test_labels = np.load(numpy_database_path+'/test_labels_('+str(self.height)+','+str(self.width)+')_2112.npy')
         self.input_shape = (height, width, 1)
 
 
@@ -100,7 +100,7 @@ class Mammographie:
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
         
-        model.add(keras.layers.Conv2D(1024, (3, 3), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
+        model.add(keras.layers.Conv2D(320, (3, 3), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
 
@@ -226,7 +226,7 @@ class Mammographie:
         
 
 
-mammo = Mammographie(1056, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
+mammo = Mammographie(2112, '/content/drive/My Drive/Colab Notebooks/Projet_Deusto/Numpy_dataset', 129, 129)
 mammo.train()
 
 
