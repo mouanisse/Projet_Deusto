@@ -92,15 +92,15 @@ class Mammographie:
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
-        model.add(keras.layers.Conv2D(80, (5, 5), activation='relu'))
+        model.add(keras.layers.Conv2D(80, (3, 3), activation='relu'))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))  # divise par 4 les dimensions de l'image
 
-        model.add(keras.layers.Conv2D(160, (4, 4), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
+        model.add(keras.layers.Conv2D(160, (2, 2), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
         
-        model.add(keras.layers.Conv2D(320, (4, 4), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
+        model.add(keras.layers.Conv2D(320, (2, 2), activation='relu'))#, activity_regularizer=keras.regularizers.l1(0.001)))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.MaxPooling2D(2, 2))
 
