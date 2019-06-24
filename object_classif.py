@@ -9,7 +9,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch import optim
 import numpy as np
-import matlab.pyplot as plt
+import matplotlib.pyplot as plt
 from IPython.display import HTML, display
 import sys
 
