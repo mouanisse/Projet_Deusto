@@ -127,6 +127,8 @@ optimizer = optim.SGD(model.parameters(), lr=0.01, weight_decay= 1e-6,
 
 for epoch in range(1, 31): ## run the model for 30 epochs
     
+    print ("Epoch:", epoch)
+    
     # Those two vectors will contain the loss for every batch,
     # and the loss that will be computed next to the bar progress represents
     # the mean of every vector.
@@ -136,8 +138,11 @@ for epoch in range(1, 31): ## run the model for 30 epochs
     ## turn the training mode "on".
     model.train()
     
-    # create a progress bar
+    # Create a progress bar
     progress = ProgressMonitor(length=len(train_set))
+    
+    # Create two vectors to save the train, and test predictions.
+    train_pred, valid_pred = [], []
     
     
     for data, target in trainloader:
@@ -170,11 +175,19 @@ for epoch in range(1, 31): ## run the model for 30 epochs
         ## 6. The loss value of each batch is appended train_loss
         train_loss.append(loss.item())
         
+        ## 7. Save the train predictions
+        train_pred.extend(output.argmax(dim=1).cpu().numpy())
+        
+        
+    ## 8. At the end of every epoch, we compute the training accuracy, and display it alongside the training loss.
+    train_pred = torch.tensor(train_pred, dtype=torch.int64)
+    train_accuracy = torch.mean((train_pred == train_set.train_labels).float())
+    print('Training loss: ', np.mean(train_loss), 'Training accuracy: {:.4f}%'.format(float(train_accuracy) * 100))
+        
     ## We r now telling our nn that this is testing part, and that the 
     ## training part is over, we can also use model.train(mode=False).
     model.eval()
     
-    y_pred = []
     
     for data, target in validloader:
         
@@ -191,21 +204,20 @@ for epoch in range(1, 31): ## run the model for 30 epochs
         ## 3. The loss value of each batch is appended valid_loss
         valid_loss.append(loss.item())
         
-        ## 4. save predictions
-        ## extends the list by adding all items of a list 
+        ## 4. save predictions in y_pred.
+        ## The method ".extend" extends the list by adding all items of a list 
         ## (passed as an argument) to the end.
-        y_pred.extend(output.argmax(dim=1).cpu().numpy())
+        valid_pred.extend(output.argmax(dim=1).cpu().numpy())
         
-        # Calculate validation accuracy
-        y_pred = torch.tensor(y_pred, dtype=torch.int64)
-        val_accuracy = torch.mean((y_pred == valid_set.test_labels).float())
-        print('Validation accuracy: {:.4f}%'.format(float(val_accuracy) * 100))
         
-    print ("Epoch:", epoch, "Training Loss: ", np.mean(train_loss), 
-           "Valid Loss: ", np.mean(valid_loss))
+    ## 5. At the end of every epoch, we compute the validation accuracy, and display it alongside the validation loss.
+    valid_pred = torch.tensor(valid_pred, dtype=torch.int64)
+    valid_accuracy = torch.mean((valid_pred == valid_set.test_labels).float())
+    print('Validation loss: ', np.mean(valid_loss), 'Validation accuracy: {:.4f}%'.format(float(valid_accuracy) * 100))
     
 
-## dataloader for validation dataset 
+## We will perform the testing step on the same validation set
+## Dataloader for validation dataset 
 dataiter = iter(validloader)
 
 # we r using iter(), so we can loop for all the tuples in dataiter 
