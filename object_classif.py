@@ -66,11 +66,11 @@ _tasks = transforms.Compose([
 
 # To perform object classification, we will be using CIFAR-10 dataset,
 # that is included in the torchvision package.
-## load the dataset 
+## Load the dataset, xxx_set contains data and labels. 
 train_set = CIFAR10('data', train=True, download=True, transform=_tasks)
 valid_set = CIFAR10('data', train=False, download=True, transform=_tasks)
-print(train_set.shape)
-print(valid_set.shape)
+print(train_set.train_data.shape)
+print(valid_set.test_data.shape)
 
 
 
